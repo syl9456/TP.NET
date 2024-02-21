@@ -8,23 +8,23 @@
     <!-- la liste des genres est dans la variable Model qui est typé en ligne 3, elle correspond à la variable xxx dans View(xxx) du controller -->
     @foreach (var book in Model)
     {
-        <div class="book">
-            <h2>@book.Name</h2>
-            <p>@book.Price</p>
-            <p>@book.Content</p>
-        </div>
-        @foreach(var author in book.Authors)
-        {
-            <div class="author">
-                <h3>@author.Name</h3>
+            <div class="book" >
+                <h2><a asp-area="" asp-controller="Book" asp-action="Show" asp-route-id="@book.Id">@book.Name</a></h2>
+                <p>@book.Price</p>
+                <p>@book.Content</p>
+                @foreach(var author in book.Authors)
+                {
+                    <div class="author">
+                        <h3>@author.Name</h3>
+                    </div>
+                }
+                @foreach(var genre in book.Genres)
+                {
+                    <div class="genre">
+                        <h3>@genre.Name</h3>
+                    </div>
+                }
             </div>
-        }
-        @foreach(var genre in book.Genres)
-        {
-            <div class="genre">
-                <h3>@genre.Name</h3>
-            </div>
-        }
     }
 </div>
 
