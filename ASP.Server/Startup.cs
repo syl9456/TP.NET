@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,10 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ASP.Server.Database;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Threading.Tasks;
-using System.Globalization;
+
 
 namespace ASP.Server
 {
@@ -28,9 +29,11 @@ namespace ASP.Server
 
             services.AddMvc();
         }
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder ASP_Server, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 ASP_Server.UseDeveloperExceptionPage();
@@ -54,6 +57,11 @@ namespace ASP.Server
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            String pluginsPath = "./Plugins";
+            PluginLoader.LoadPlugins(pluginsPath);
+
+            [DllImport("")]
+            
             using (var scope = ASP_Server.ApplicationServices.CreateScope())
             {
                 DbInitializer.Initialize(scope.ServiceProvider.GetRequiredService<LibraryDbContext>());

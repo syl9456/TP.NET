@@ -10,6 +10,7 @@ using ASP.Server.Models;
 using AutoMapper;
 using ASP.Server.Dtos;
 using AutoMapper.QueryableExtensions;
+using Microsoft.CodeAnalysis.Operations;
 
 namespace ASP.Server.Api
 {
@@ -104,6 +105,22 @@ namespace ASP.Server.Api
                 ToListAsync();
             return Ok(genres);
             throw new NotImplementedException("You have to do it your self");
+        }
+        
+        
+        [HttpGet("/api/use-plugin/{pluginName}")]
+        public IActionResult UsePlugin(string pluginName)
+        {
+            var plugin = PluginLoader.Plugins.
+                FirstOrDefault(p => p.Name.Equals(pluginName, StringComparison.OrdinalIgnoreCase));
+            
+            if (plugin == null)
+            {
+                return NotFound($"Plugin '{pluginName}' not found.");
+            }
+
+            var result = plugin.Execute();
+            return Ok(result);
         }
     }
 }
