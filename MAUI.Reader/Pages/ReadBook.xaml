@@ -5,21 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MAUI.Reader.Pages"
              xmlns:vm="clr-namespace:MAUI.Reader.ViewModel"
+             xmlns:model="clr-namespace:MAUI.Reader.Model"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
-             d:DataContext="vm:InDesignReadBook"
-             x:DataType="vm:DetailsBook"
+             d:DataContext="vm:ReadBook"
+             x:DataType="vm:ReadBook"
              Title="ReadBook">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
-        </Grid.RowDefinitions>
-        <!-- On aimerais bien avoir le tire du livre en entête -->
 
-        <!-- Ainsi que le contenu du livre ! -->
-    </Grid>
+    <VerticalStackLayout BindingContext="{Binding CurrentBook}">
+        <StackLayout x:DataType="model:Book">
+            <Label Text="{Binding Name}"/>
+            <ScrollView>
+                <Label Text="{Binding Content}"/>
+            </ScrollView>
+        </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>
 

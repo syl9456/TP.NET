@@ -5,19 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MAUI.Reader.Pages"
              xmlns:vm="clr-namespace:MAUI.Reader.ViewModel"
+             xmlns:model="clr-namespace:MAUI.Reader.Model"
+             d:DataContext="vm:DetailsBook"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
-             x:DataType="vm:InDesignDetailsBook"
+             x:DataType="vm:DetailsBook"
              Title="DetailsBook">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- il faut afficher les information du livre: Nom, Auteur, Prix, Genres-->
-        <!-- Mais pas le contenu ! -->
-        <!-- N'oublier pas le bouton pour aller lire le livre. La commande ReadCommand est faite pour ca ! -->
-    </Grid>
+    <ScrollView>
+        <VerticalStackLayout>
+            <StackLayout BindingContext="{Binding CurrentBook}">
+                <StackLayout x:DataType="model:Book" >
+                    <Label Text="{Binding Name}"/>
+                    <ListView ItemsSource="{Binding Authors}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Author">
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding Name}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Label Text="{Binding Price}"></Label>
+                    <ListView ItemsSource="{Binding Genres}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Genre">
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding Name}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+            <Button 
+                Text="Lire le livre" 
+                Command="{Binding ReadBookCommand}"
+                CommandParameter="{Binding CurrentBook}">
+            </Button>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
