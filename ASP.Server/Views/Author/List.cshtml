@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Liste des Auteurs";
 }
-
+<div class="container mt-4">
+    <div class="col-md-4 text-right">
+        <a href="@Url.Action("Create", "Genre")" class="btn btn-success">Ajouter Auteur</a>
+    </div>
+</div>
 <div class="listeAuthors">
     <h1>Liste des Auteurs:</h1>
     <table class="table">

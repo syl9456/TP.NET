@@ -59,8 +59,6 @@ namespace ASP.Server
 
             String pluginsPath = "./Plugins";
             PluginLoader.LoadPlugins(pluginsPath);
-
-
             
             using (var scope = ASP_Server.ApplicationServices.CreateScope())
             {

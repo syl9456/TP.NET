@@ -90,7 +90,7 @@ namespace ASP.Server.Api
         {
             var book = await libraryDbContext.Books.
                 Where(b => b.Id == id).
-                ProjectTo<BookWithoutAuthorsDto>(mapper.ConfigurationProvider).
+                ProjectTo<BookDto>(mapper.ConfigurationProvider).
                 FirstOrDefaultAsync();
             
             return Ok(book);
