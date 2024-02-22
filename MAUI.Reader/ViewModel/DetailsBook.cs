@@ -1,7 +1,10 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using MAUI.Reader.Model;
+using MAUI.Reader.Service;
 
 namespace MAUI.Reader.ViewModel
 {
@@ -11,19 +14,22 @@ namespace MAUI.Reader.ViewModel
 
         // Une commande permet de recevoir des évènement de l'IHM
         public ICommand ReadBook2Command { get; init; } = new RelayCommand<Book>(x => { /* A vous de définir la commande */ });
-
-        // Vous pouvez aussi utiliser cette forme pour définir une commande. La ligne du dessus fait strictement la même chose, choisissez une des 2 formes
+        public ObservableCollection<Book> Book { get; set; } = new ObservableCollection<Book>();
         [RelayCommand]
         public void ReadBook(Book book)
         {
             /* A vous de définir la commande */
         }
-
-        // n'oublier pas faire de faire le binding dans DetailsBook.xaml !!!!
+        
         public Book CurrentBook { get; init; } = book;
-    }
 
-    /* Cette classe sert juste a afficher des donnée de test dans le designer */
+        private async void GetBook(int id)
+        {
+            var book = await Ioc.Default.GetRequiredService<LibraryService>().LoadBook(id);
+            Book.Add(book);
+        }
+    }
+    
     public class InDesignDetailsBook : DetailsBook
     {
         public InDesignDetailsBook() : base(new Book() /*{ Title = "Test Book" }*/) { }
