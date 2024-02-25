@@ -12,8 +12,11 @@ namespace MAUI.Reader.ViewModel
 {
     public partial class ListBooks : INotifyPropertyChanged
     {
+        public ObservableCollection<Book> Books { get; set; } = new ObservableCollection<Book>(); 
+        public ICommand NavigateToDetailsCommand { get; }
         public ListBooks()
         {
+            GetBooks();
             ItemSelectedCommand = new Command<Book>(OnItemSelectedCommand);
         }
         public ICommand ItemSelectedCommand { get; private set; }
@@ -21,7 +24,17 @@ namespace MAUI.Reader.ViewModel
         {
             Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>(book);
         }
-
-        public ObservableCollection<Book> Books => Ioc.Default.GetRequiredService<LibraryService>().Books;
+        //public ObservableCollection<Book> Books => Ioc.Default.GetRequiredService<LibraryService>().Books;
+        
+        private async void GetBooks()
+        {
+            var books = await Ioc.Default.GetRequiredService<LibraryService>().LoadBooks();
+            foreach (var book in books)
+            {
+                MainThread.BeginInvokeOnMainThread(() => {
+                    Books.Add(book);
+                });
+            }
+        }
     }
 }

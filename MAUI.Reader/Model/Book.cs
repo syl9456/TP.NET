@@ -25,16 +25,18 @@ namespace MAUI.Reader.Model
         public string Content { get; set; }
         public List<Genre> Genres { get; set; }
     }
-
+    
     public class Author
     {
         public int Id { get; set; }
         public String Name { get; set; }
+        public List<Book> Books { get; set; } 
     }
-
+    
     public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<Book> Books { get; set; }
     }
 }
