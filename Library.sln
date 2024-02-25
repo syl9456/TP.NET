@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF.Reader.OpenApi", "WPF.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI.Reader", "MAUI.Reader\MAUI.Reader.csproj", "{94E3381D-7D11-41E4-982A-18DAAD7260A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{94E3381D-7D11-41E4-982A-18DAAD7260A1}.Release|x86.ActiveCfg = Release|Any CPU
 		{94E3381D-7D11-41E4-982A-18DAAD7260A1}.Release|x86.Build.0 = Release|Any CPU
 		{94E3381D-7D11-41E4-982A-18DAAD7260A1}.Release|x86.Deploy.0 = Release|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Debug|x64.Build.0 = Debug|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Debug|x86.Build.0 = Debug|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Release|x64.ActiveCfg = Release|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Release|x64.Build.0 = Release|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Release|x86.ActiveCfg = Release|Any CPU
+		{9C010447-B7EA-4A1F-90F3-EFE2025CB27D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,7 +16,7 @@ namespace ASP.Server.ViewModels
         public IEnumerable<int> Authors { get; set; }
         public IEnumerable<Author> AllAuthors { get; init; }
         public double Price { get; set; }
-        public string Content { get; set; }
+        public String Content { get; set; }
 
         // Liste des genres séléctionné par l'utilisateur
         [Required(ErrorMessage = "You need at least 1 genre"), MinLength(1)]

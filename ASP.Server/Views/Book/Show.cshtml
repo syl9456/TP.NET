@@ -1,0 +1,20 @@
+@using ASP.Server.Models
+@model Book
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="show-book">
+    <h1>Livre :</h1>
+    <p>@Model.Name</p>
+    <p>@Model.Price</p>
+    <p>@Model.Content</p>
+    
+    @foreach (var genre in @Model.Genres)
+    {
+        <p>@genre.Name</p>
+    }
+    @foreach (var auteur in @Model.Authors)
+    {
+        <p>@auteur.Name</p>
+    }
+</div>

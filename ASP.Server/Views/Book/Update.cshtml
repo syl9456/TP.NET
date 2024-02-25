@@ -1,6 +1,6 @@
 @using ASP.Server.Controllers
 @using ASP.Server.ViewModels
-@model CreateBookViewModel
+@model UpdateBookViewModel
 @{
     ViewData["Title"] = "Add a book";
 }
@@ -20,9 +20,9 @@ label {
 </style>
 
 <!-- Voici une facon de faire, mais ce n'est pas la seul, a vous de jouer ! -->
-<form asp-controller="Book" asp-action="Create">
+<form asp-controller="Book" asp-action="Update" method="post">
     <div class="input-group">
-        <label asp-for="Name"></label>
+        <label asp-for="Name" ></label>
         <input asp-for="Name" />
         <label asp-for="Price"></label>
         <input asp-for="Price" />
@@ -48,5 +48,5 @@ label {
         </select>
     </div>
     <span asp-validation-for="Genres" class="text-danger"></span>
-    <input type="submit" value="Update" style="width: 100%; margin-top: 50px" />
+    <input type="submit" class="btn btn-primary" value="Add" style="width: 100%; margin-top: 50px" />
 </form>

@@ -40,7 +40,10 @@ namespace ASP.Server.Controllers
             }
 
             // Il faut interoger la base pour récupérer tous les genres, pour que l'utilisateur puisse les slécétionné
-            return View(new CreateGenreViewModel() { AllBooks = libraryDbContext.Books });
+            return View(new CreateGenreViewModel()
+            {
+                AllBooks = libraryDbContext.Books
+            });
         }
     }
 }

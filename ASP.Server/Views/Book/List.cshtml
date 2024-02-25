@@ -1,7 +1,30 @@
 ﻿@using ASP.Server.Models
-@model IEnumerable<Book>
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ASP.Server.ViewModels.BooksListViewModel
 @{
     ViewData["Title"] = "Home Page";
+}
+@using (Html.BeginForm("List", "Book", FormMethod.Get))
+{
+    <div>
+        <label for="selectedAuthors">Auteurs:</label>
+        <select id="selectedAuthors" name="selectedAuthors" multiple="multiple">
+            @foreach (var author in Model.AllAuthors)
+            {
+                <option value="@author.Id">@author.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="selectedGenres">Genres:</label>
+        <select id="selectedGenres" name="selectedGenres" multiple="multiple">
+            @foreach (var genre in Model.AllGenres)
+            {
+                <option value="@genre.Id">@genre.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Filtrer</button>
 }
 
 <div class="listeBooks">
@@ -19,11 +42,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var book in Model)
+            @foreach (var book in Model.Books)
             {
                 <tr>
                     <td>@book.Id</td>
-                    <td>@book.Name</td>
+                    <td>
+                        <a asp-area="" asp-controller="Book" asp-action="Show" asp-route-id=@book.Id>
+                            @book.Name
+                        </a>
+                    </td>
                     <td>@book.Price</td>
                     <td>@book.Content</td>
                     <td>
@@ -41,8 +68,14 @@
                         }
                     </td>
                     <td>
-                      <button onclick="window.location.href='/Book/Edit/@(book.Id)';"  type="button" class="btn btn-primary">Edit</button>
-                      <button type="button"  onclick="window.location.href='/Book/Delete/@(book.Id)';" class="btn btn-danger">Supprimer</button>
+                        <a class="btn-primary" asp-area="" asp-controller="Book"
+                           asp-action="Update" asp-route-id=@book.Id>
+                            Edit
+                        </a>
+                        <a class="btn-primary" asp-area="" asp-controller="Book"
+                           asp-action="Delete" asp-route-id=@book.Id>
+                            Supprimer
+                        </a>
                     </td>
                 </tr>
             }
