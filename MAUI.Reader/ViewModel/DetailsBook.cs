@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.DependencyInjection;
@@ -8,30 +7,25 @@ using MAUI.Reader.Service;
 
 namespace MAUI.Reader.ViewModel
 {
-    public partial class DetailsBook(Book book) : INotifyPropertyChanged
+    public partial class DetailsBook : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Une commande permet de recevoir des évènement de l'IHM
-        public ICommand ReadBook2Command { get; init; } = new RelayCommand<Book>(x => { /* A vous de définir la commande */ });
+        public DetailsBook(int Id)
+        {
+            GetBook(Id);
+            ReadBookCommand = new Command<Book>(ReadBook);
+        }
         public ObservableCollection<Book> Book { get; set; } = new ObservableCollection<Book>();
-        [RelayCommand]
+        public ICommand ReadBookCommand { get; private set; }
         public void ReadBook(Book book)
         {
-            /* A vous de définir la commande */
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<ReadBook>(book);
         }
-        
-        public Book CurrentBook { get; init; } = book;
+
+        public Book CurrentBook { get; private set; }
 
         private async void GetBook(int id)
         {
-            var book = await Ioc.Default.GetRequiredService<LibraryService>().LoadBook(id);
-            Book.Add(book);
+            CurrentBook = await Ioc.Default.GetRequiredService<LibraryService>().LoadBook(id);
         }
-    }
-    
-    public class InDesignDetailsBook : DetailsBook
-    {
-        public InDesignDetailsBook() : base(new Book() /*{ Title = "Test Book" }*/) { }
     }
 }

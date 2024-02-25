@@ -10,41 +10,36 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              x:DataType="vm:ListBooks">
-
+    
     <ContentPage.BindingContext>
         <vm:ListBooks />
     </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
-            <ListView ItemsSource="{Binding Books}" SelectionMode="None">
-                <ListView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding Books}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Book">
-                        <ViewCell>
-                            <Grid Padding="10" ColumnSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Column="0" />
-                                <Label Text="{Binding Price, StringFormat='{0:C}'}" Grid.Column="1" HorizontalOptions="End" />
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListBooks}}, Path=BindingContext.NavigateToDetailsCommand}" CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </ViewCell>
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Column="0" />
+                            <Label Text="{Binding Price, StringFormat='{0:C}'}" Grid.Column="1" />
+                            <Button 
+                                    Text="Voir détails" 
+                                    Grid.Column="2"
+                                    Command="{Binding BindingContext.ItemSelectedCommand, Source={RelativeSource FindAncestor, AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding Id}"
+                                    BackgroundColor="#0078D4"
+                                    TextColor="White"
+                                    CornerRadius="10" />
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="DarkSlateGray" />
-                <Setter Property="FontSize" Value="Medium" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
 </ContentPage>

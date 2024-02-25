@@ -12,22 +12,17 @@ namespace MAUI.Reader.ViewModel
 {
     public partial class ListBooks : INotifyPropertyChanged
     {
-        public ObservableCollection<Book> Books { get; set; } = new ObservableCollection<Book>(); 
-        public ICommand NavigateToDetailsCommand { get; }
+        public ObservableCollection<Book> Books { get; set; } = new ObservableCollection<Book>();
         public ListBooks()
         {
-            NavigateToDetailsCommand = new Command<Book>(OnBookSelected);
             GetBooks();
-            ItemSelectedCommand = new Command(OnItemSelectedCommand);
+            ItemSelectedCommand = new Command<int>(OnItemSelectedCommand);
         }
         public ICommand ItemSelectedCommand { get; private set; }
-        public void OnItemSelectedCommand(object book)
+        public void OnItemSelectedCommand(int Id)
         {
+            Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>(Id);
         }
-
-
-        // n'oublier pas faire de faire le binding dans ListBook.xaml !!!!
-        //public ObservableCollection<Book> Books => Ioc.Default.GetRequiredService<LibraryService>().Books;
         
         private async void GetBooks()
         {
@@ -38,23 +33,6 @@ namespace MAUI.Reader.ViewModel
                     Books.Add(book);
                 });
             }
-        }
-        private void OnBookSelected(Book book)
-        {
-            //redirect to details page
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>(book);
-        }
-
-
-
-        public int Count { get; set; }
-
-        [RelayCommand]
-        public void CounterClicked()
-        {
-            Count++;
-
-            Ioc.Default.GetRequiredService<INavigationService>().Navigate<DetailsBook>(new Book());
         }
     }
 }
