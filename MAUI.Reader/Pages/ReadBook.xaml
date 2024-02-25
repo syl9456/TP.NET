@@ -11,15 +11,25 @@
              d:DesignWidth="800"
              d:DataContext="vm:ReadBook"
              x:DataType="vm:ReadBook"
-             Title="ReadBook">
+             Title="{Binding CurrentBook.Name}">
 
-    <VerticalStackLayout BindingContext="{Binding CurrentBook}">
-        <StackLayout x:DataType="model:Book">
-            <Label Text="{Binding Name}"/>
-            <ScrollView>
-                <Label Text="{Binding Content}"/>
-            </ScrollView>
-        </StackLayout>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout BindingContext="{Binding CurrentBook}">
+            <StackLayout x:DataType="model:Book">
+                <Label Text="{Binding Name}"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,0" />
+
+                <BoxView HeightRequest="2" 
+                     HorizontalOptions="Fill" 
+                     Margin="0,5,0,5" />
+                
+                <Label Text="{Binding Content}"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
 

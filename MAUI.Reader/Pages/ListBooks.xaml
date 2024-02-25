@@ -17,58 +17,29 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
-            <ListView ItemsSource="{Binding Books}" SelectionMode="None">
-                <ListView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding Books}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Book">
-                        <ViewCell>
-                            <Grid Padding="10" ColumnSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Column="0" />
-                                <Label Text="{Binding Price, StringFormat='{0:C}'}" Grid.Column="1" />
-                                <Button 
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" Grid.Column="0" />
+                            <Label Text="{Binding Price, StringFormat='{0:C}'}" Grid.Column="1" />
+                            <Button 
                                     Text="Voir détails" 
                                     Grid.Column="2"
                                     Command="{Binding BindingContext.ItemSelectedCommand, Source={RelativeSource FindAncestor, AncestorType={x:Type ContentPage}}}"
-                                    CommandParameter="{Binding .}">
-                                </Button>
-                            </Grid>
-                        </ViewCell>
+                                    CommandParameter="{Binding Id}"
+                                    BackgroundColor="#0078D4"
+                                    TextColor="White"
+                                    CornerRadius="10" />
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <!-- Supprimer tous ta parti suivante qui est juste la pour vous montrer ce qu'on peut faire -->
-            <Image Source="dotnet_bot.png"
-                   HeightRequest="185"
-                   Aspect="AspectFit"
-                   SemanticProperties.Description="dot net bot in a race car number eight" />
-
-            <Label Text="Hello, World!"
-                   Style="{StaticResource Headline}"
-                   SemanticProperties.HeadingLevel="Level1" />
-
-            <Label Text="Welcome to &#10;.NET Multi-platform App UI"
-                   Style="{StaticResource SubHeadline}"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-
-            <Button x:Name="CounterBtn"
-                    Text="{Binding Count}"
-                    SemanticProperties.Hint="Counts the number of times you click"
-                    Command="{Binding CounterClickedCommand}"
-                    HorizontalOptions="Fill">
-            </Button>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="DarkSlateGray" />
-                <Setter Property="FontSize" Value="Medium" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
 </ContentPage>
